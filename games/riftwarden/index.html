@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RIFT WARDEN: Ember Oath</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <canvas id="gameCanvas" width="960" height="540" aria-label="게임 화면"></canvas>
+
+      <header class="hud" aria-live="polite">
+        <div class="hud-group">
+          <div class="hud-label">Shield</div>
+          <div class="meter" aria-hidden="true"><span id="shieldFill"></span></div>
+          <div id="shieldText" class="hud-value">100 / 100</div>
+        </div>
+        <div class="hud-group">
+          <div class="hud-label">Core</div>
+          <div class="meter core" aria-hidden="true"><span id="coreFill"></span></div>
+          <div id="coreText" class="hud-value">100 / 100</div>
+        </div>
+        <div class="hud-group compact">
+          <div class="hud-label">Heat</div>
+          <div id="heatText" class="hud-value">0%</div>
+        </div>
+        <div class="hud-group compact">
+          <div class="hud-label">Phase</div>
+          <div id="phaseText" class="hud-value">1 · Breach</div>
+        </div>
+        <div class="hud-group compact">
+          <div class="hud-label">Time</div>
+          <div id="timeText" class="hud-value">00:00</div>
+        </div>
+        <div class="hud-group compact">
+          <div class="hud-label">Score</div>
+          <div id="scoreText" class="hud-value">0</div>
+        </div>
+      </header>
+
+      <aside id="objectiveToast" class="toast" role="status"></aside>
+
+      <section id="titleScreen" class="overlay active" aria-labelledby="titleHeading">
+        <div class="panel title-panel">
+          <p class="eyebrow">Single-Player Tactical Survival</p>
+          <h1 id="titleHeading">RIFT WARDEN<br /><span>EMBER OATH</span></h1>
+          <p class="subtitle">
+            붕괴 직전의 균열 요새에서 코어를 지키고 3단계 침공을 돌파하세요.
+          </p>
+          <nav class="menu" aria-label="메인 메뉴">
+            <button class="menu-btn" data-action="continue">Continue</button>
+            <button class="menu-btn primary" data-action="new">New Run</button>
+            <button class="menu-btn" data-action="options">Options</button>
+            <button class="menu-btn" data-action="credits">Credits</button>
+          </nav>
+          <div class="title-meta">
+            <p id="bestText">Best Score: 0</p>
+            <p id="runText">Best Survival: 00:00</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="optionsScreen" class="overlay" aria-labelledby="optionsHeading">
+        <div class="panel">
+          <h2 id="optionsHeading">Options</h2>
+          <div class="option-grid">
+            <label class="option-item">
+              <span>Master Volume</span>
+              <input id="masterVolume" type="range" min="0" max="100" step="1" />
+              <output id="masterVolumeText">80%</output>
+            </label>
+            <label class="option-item inline">
+              <span>Mute</span>
+              <button id="muteToggle" class="toggle-btn" type="button" aria-pressed="false">OFF</button>
+            </label>
+            <label class="option-item inline">
+              <span>Difficulty</span>
+              <select id="difficultySelect">
+                <option value="story">Story</option>
+                <option value="normal">Normal</option>
+                <option value="hard">Hard</option>
+              </select>
+            </label>
+            <label class="option-item inline">
+              <span>Assist: Core Regen</span>
+              <button id="assistToggle" class="toggle-btn" type="button" aria-pressed="false">OFF</button>
+            </label>
+            <label class="option-item inline">
+              <span>Reduced Flash</span>
+              <button id="flashToggle" class="toggle-btn" type="button" aria-pressed="false">OFF</button>
+            </label>
+            <label class="option-item inline">
+              <span>HUD Scale</span>
+              <select id="hudScaleSelect">
+                <option value="1">100%</option>
+                <option value="1.15">115%</option>
+                <option value="1.25">125%</option>
+              </select>
+            </label>
+          </div>
+          <div class="menu split">
+            <button class="menu-btn" data-action="reset-options">Reset</button>
+            <button class="menu-btn primary" data-action="close-options">Back</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="creditsScreen" class="overlay" aria-labelledby="creditsHeading">
+        <div class="panel">
+          <h2 id="creditsHeading">Credits</h2>
+          <p class="credits-copy">
+            Design / Code / Art / Audio / QA<br />Autonomous Codex Indie Unit
+          </p>
+          <p class="credits-copy small">
+            Built with pure HTML, CSS, and Vanilla JavaScript.<br />No external assets, fully offline playable.
+          </p>
+          <div class="menu">
+            <button class="menu-btn primary" data-action="close-credits">Back</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="pauseScreen" class="overlay" aria-labelledby="pauseHeading">
+        <div class="panel">
+          <h2 id="pauseHeading">Paused</h2>
+          <p class="subtitle">침공은 멈췄지만 열기는 식지 않습니다.</p>
+          <div class="menu">
+            <button class="menu-btn primary" data-action="resume">Resume</button>
+            <button class="menu-btn" data-action="options-from-pause">Options</button>
+            <button class="menu-btn" data-action="to-title">Main Menu</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="resultScreen" class="overlay" aria-labelledby="resultHeading">
+        <div class="panel">
+          <h2 id="resultHeading">Run Complete</h2>
+          <p id="resultLead" class="subtitle">결과 요약</p>
+          <dl class="result-grid">
+            <div><dt>Score</dt><dd id="resultScore">0</dd></div>
+            <div><dt>Survival</dt><dd id="resultTime">00:00</dd></div>
+            <div><dt>Eliminations</dt><dd id="resultKills">0</dd></div>
+            <div><dt>Phase Reached</dt><dd id="resultPhase">1</dd></div>
+          </dl>
+          <div class="menu">
+            <button class="menu-btn primary" data-action="retry">Retry</button>
+            <button class="menu-btn" data-action="to-title">Main Menu</button>
+          </div>
+        </div>
+      </section>
+
+      <footer class="controls" id="controlsInfo">
+        Move: WASD / Arrow · Aim: Mouse · Fire: Hold Left Click / Space · Dash: Shift · Pulse: E · Pause: Esc
+      </footer>
+    </div>
+
+    <script src="./game.js"></script>
+  </body>
+</html>
