@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>STARFORGE: Ember Raid</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="hud-top">
+        <h1>STARFORGE: Ember Raid</h1>
+        <div class="top-right">
+          <button id="pauseBtn" type="button">일시정지 (P)</button>
+          <button id="optionBtn" type="button">옵션</button>
+        </div>
+      </header>
+
+      <section class="status" aria-live="polite">
+        <p>체력 <span id="hpText">0</span></p>
+        <p>에너지 코어 <span id="coreText">0</span> / 20</p>
+        <p>웨이브 <span id="waveText">1</span></p>
+        <p>점수 <span id="scoreText">0</span></p>
+        <p>최고점수 <span id="bestText">0</span></p>
+      </section>
+
+      <canvas id="gameCanvas" width="960" height="540" aria-label="게임 화면"></canvas>
+
+      <section class="controls-panel">
+        <strong>조작:</strong> 이동 WASD/화살표 · 사격 자동 · 대시 Space · 충격파 Shift · 일시정지 P · 옵션 O
+      </section>
+    </main>
+
+    <div id="overlay" class="overlay" role="dialog" aria-modal="true"></div>
+
+    <script src="game.js"></script>
+  </body>
+</html>

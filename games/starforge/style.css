@@ -1,0 +1,91 @@
+:root {
+  color-scheme: dark;
+  --bg: #030712;
+  --panel: rgba(15, 23, 42, 0.84);
+  --line: #334155;
+  --text: #f8fafc;
+  --sub: #cbd5e1;
+  --accent: #22d3ee;
+  --danger: #fb7185;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: radial-gradient(circle at 10% 10%, #0c4a6e 0%, transparent 35%),
+    radial-gradient(circle at 90% 20%, #4c1d95 0%, transparent 25%),
+    var(--bg);
+  color: var(--text);
+  font-family: "Segoe UI", "Noto Sans KR", sans-serif;
+}
+.app { max-width: 980px; margin: 0 auto; padding: 14px; }
+.hud-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.hud-top h1 { margin: 8px 0; font-size: clamp(1.1rem, 2.4vw, 1.6rem); }
+.top-right { display: flex; gap: 8px; }
+button {
+  background: #0f172a;
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 7px 12px;
+  cursor: pointer;
+}
+button:hover, button:focus-visible { border-color: var(--accent); outline: none; }
+.status {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.status p {
+  margin: 0;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px;
+  color: var(--sub);
+}
+.status span { color: var(--text); font-weight: 700; }
+canvas {
+  width: 100%;
+  max-width: 960px;
+  display: block;
+  margin: 0 auto;
+  border-radius: 10px;
+  border: 1px solid #1e293b;
+  background: #020617;
+}
+.controls-panel {
+  margin-top: 10px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px;
+  color: var(--sub);
+}
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: none;
+  place-items: center;
+  background: rgba(2, 6, 23, 0.72);
+  padding: 16px;
+}
+.overlay.active { display: grid; }
+.modal {
+  width: min(560px, 94vw);
+  border-radius: 14px;
+  border: 1px solid #475569;
+  background: #0b1222;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+  padding: 18px;
+}
+.modal h2 { margin: 0 0 10px; }
+.modal p, .modal li { color: var(--sub); line-height: 1.5; }
+.modal .row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+label { display: flex; align-items: center; gap: 8px; color: var(--sub); margin: 8px 0; }
+input[type="range"] { width: 220px; }
+.small { font-size: 0.9rem; color: #94a3b8; }
+
+@media (max-width: 760px) {
+  .status { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

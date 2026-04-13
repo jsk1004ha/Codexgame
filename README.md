@@ -15,6 +15,7 @@
 
 - `games/example/index.html`: 카드 연결 예시 게임
 - `games/voidpulse/index.html`: **VOIDPULSE: Last Beacon**
+- `games/starforge/index.html`: **STARFORGE: Ember Raid**
 
 ## 메인 페이지 디자인
 
