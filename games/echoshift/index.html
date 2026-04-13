@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ECHO SHIFT: Night Circuit</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <header class="hud top" aria-live="polite">
+        <div class="group left">
+          <div class="chip"><span>구역</span><strong id="phaseLabel">-</strong></div>
+          <div class="chip"><span>목표</span><strong id="objectiveLabel">-</strong></div>
+          <div class="chip"><span>시간</span><strong id="timeLabel">00:00</strong></div>
+        </div>
+        <div class="group right">
+          <div class="chip"><span>점수</span><strong id="scoreLabel">0</strong></div>
+          <div class="chip"><span>최고</span><strong id="bestLabel">0</strong></div>
+        </div>
+      </header>
+
+      <main>
+        <canvas id="gameCanvas" width="1080" height="608" aria-label="게임 화면"></canvas>
+      </main>
+
+      <footer class="hud bottom">
+        <div class="bar">
+          <label>기체 내구도</label>
+          <div class="meter"><i id="hpFill"></i></div>
+          <span id="hpText">100 / 100</span>
+        </div>
+        <div class="bar">
+          <label>에너지</label>
+          <div class="meter energy"><i id="energyFill"></i></div>
+          <span id="energyText">0%</span>
+        </div>
+      </footer>
+
+      <section class="overlay visible" id="titleScreen" role="dialog" aria-modal="true">
+        <div class="panel large">
+          <p class="kicker">Synthwave Tactical Action</p>
+          <h1>ECHO SHIFT: Night Circuit</h1>
+          <p>
+            네온 회랑을 돌파하며 코어 에너지를 충전하고, 마지막에 출현하는 루인 센티넬을
+            파괴하세요.
+          </p>
+          <div class="actions">
+            <button id="startBtn">작전 시작</button>
+            <button id="openOptionBtn" class="ghost">옵션</button>
+            <button id="openCreditBtn" class="ghost">크레딧</button>
+          </div>
+          <ul>
+            <li>이동: WASD / 방향키</li>
+            <li>기본 사격: 자동 추적</li>
+            <li>대시: Shift (에너지 35%)</li>
+            <li>펄스: Space (에너지 55%, 탄막 정리)</li>
+            <li>일시정지: P 또는 ESC</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="overlay" id="optionScreen" role="dialog" aria-modal="true">
+        <div class="panel">
+          <h2>옵션</h2>
+          <div class="row">
+            <label for="difficulty">난이도</label>
+            <select id="difficulty">
+              <option value="assist">어시스트</option>
+              <option value="normal" selected>노멀</option>
+              <option value="hard">하드</option>
+            </select>
+          </div>
+          <div class="row">
+            <label for="masterVolume">볼륨</label>
+            <input id="masterVolume" type="range" min="0" max="100" value="70" />
+          </div>
+          <div class="row">
+            <label><input id="muteToggle" type="checkbox" /> 음소거</label>
+            <label><input id="shakeToggle" type="checkbox" checked /> 화면 흔들림</label>
+            <label><input id="flashToggle" type="checkbox" checked /> 연출 플래시</label>
+          </div>
+          <div class="actions"><button id="closeOptionBtn">닫기</button></div>
+        </div>
+      </section>
+
+      <section class="overlay" id="upgradeScreen" role="dialog" aria-modal="true">
+        <div class="panel">
+          <h2>강화 선택</h2>
+          <p id="upgradeHint">다음 구역으로 진입하기 전, 하나를 선택하세요.</p>
+          <div class="upgrade-grid" id="upgradeGrid"></div>
+        </div>
+      </section>
+
+      <section class="overlay" id="pauseScreen" role="dialog" aria-modal="true">
+        <div class="panel">
+          <h2>일시정지</h2>
+          <p>작전을 잠시 멈췄습니다.</p>
+          <div class="actions">
+            <button id="resumeBtn">계속</button>
+            <button id="retryBtn" class="ghost">다시 시작</button>
+            <button id="pauseOptionBtn" class="ghost">옵션</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="overlay" id="resultScreen" role="dialog" aria-modal="true">
+        <div class="panel">
+          <h2 id="resultTitle">작전 종료</h2>
+          <p id="resultDesc"></p>
+          <div class="stats" id="resultStats"></div>
+          <div class="actions">
+            <button id="playAgainBtn">다시 플레이</button>
+            <button id="toTitleBtn" class="ghost">타이틀로</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="overlay" id="creditScreen" role="dialog" aria-modal="true">
+        <div class="panel">
+          <h2>크레딧</h2>
+          <p>기획/아트/코드/사운드: Codex Autonomous Studio</p>
+          <p>엔진: Vanilla JavaScript + Canvas + Web Audio API</p>
+          <p>제작 버전: 1.0</p>
+          <div class="actions"><button id="closeCreditBtn">닫기</button></div>
+        </div>
+      </section>
+
+      <div id="toast" aria-live="assertive"></div>
+    </div>
+
+    <script src="game.js"></script>
+  </body>
+</html>
