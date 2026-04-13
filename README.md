@@ -25,6 +25,7 @@
 - `games/gildedbreach/index.html`: **GILDED BREACH: House of Risk**
 - `games/sealkeeper/index.html`: **SEALKEEPER: Archive Quarantine**
 - `games/ironjunction/index.html`: **IRON JUNCTION: Signalmaster**
+- `games/nightcourier/index.html`: **NIGHT COURIER: Black File**
 
 ## 메인 페이지 디자인
 
