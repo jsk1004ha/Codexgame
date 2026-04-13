@@ -21,6 +21,7 @@
 - `games/riftwarden/index.html`: **RIFT WARDEN: Ember Oath**
 - `games/chronovault/index.html`: **CHRONO VAULT: Null Run**
 - `games/aegisfall/index.html`: **AEGISFALL: Eclipse Run**
+- `games/embersigil/index.html`: **EMBER SIGIL: Ashen Loop**
 
 ## 메인 페이지 디자인
 
