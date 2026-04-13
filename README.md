@@ -20,6 +20,7 @@
 - `games/neoncitadel/index.html`: **NEON CITADEL: Last Signal**
 - `games/riftwarden/index.html`: **RIFT WARDEN: Ember Oath**
 - `games/chronovault/index.html`: **CHRONO VAULT: Null Run**
+- `games/aegisfall/index.html`: **AEGISFALL: Eclipse Run**
 
 ## 메인 페이지 디자인
 
