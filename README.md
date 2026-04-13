@@ -6,7 +6,15 @@
 
 - `index.html`: 모든 게임으로 이동하는 메인 허브 페이지
 - `games/<game-name>/index.html`: 개별 게임 엔트리 파일
+- `games/<game-name>/style.css`: 개별 게임 스타일 파일(선택)
+- `games/<game-name>/game.js`: 개별 게임 로직 파일(선택)
+- `games/<game-name>/README.md`: 개별 게임 실행/조작 설명
 - `agent.md`: 게임 추가/연결 시 따라야 할 작업 규칙
+
+## 등록된 게임
+
+- `games/example/index.html`: 카드 연결 예시 게임
+- `games/voidpulse/index.html`: **VOIDPULSE: Last Beacon**
 
 ## 메인 페이지 디자인
 
@@ -18,11 +26,11 @@
 
 1. `games/` 아래에 게임 폴더를 만듭니다.
    - 예: `games/tetris/`
-2. 해당 폴더에 시작 파일을 만듭니다.
-   - 예: `games/tetris/index.html`
+2. 해당 폴더에 시작 파일 `index.html`을 만듭니다.
+   - 필요 시 `style.css`, `game.js`, `README.md`를 같은 폴더에 추가합니다.
 3. 루트의 `index.html`에 게임 카드와 링크를 추가합니다.
    - 예: `<a href="./games/tetris/index.html">게임 시작 →</a>`
-4. 브라우저에서 `index.html`을 열어 링크 동작을 확인합니다.
+4. 브라우저에서 루트 `index.html`을 열어 링크 동작을 확인합니다.
 
 ## 로컬 실행
 

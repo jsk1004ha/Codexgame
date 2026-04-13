@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VOIDPULSE: Last Beacon</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="game-shell">
+      <canvas id="gameCanvas" width="960" height="540" aria-label="VOIDPULSE 게임 화면"></canvas>
+
+      <section id="menu" class="panel visible" aria-live="polite">
+        <h1>VOIDPULSE: Last Beacon</h1>
+        <p class="tagline">네온 폭풍 속에서 코어를 지키고, 보스 <strong>Oblivion Eye</strong>를 무너뜨리세요.</p>
+        <div class="menu-buttons">
+          <button id="startBtn">게임 시작</button>
+          <button id="optionsBtn">옵션</button>
+          <button id="creditsBtn">크레딧</button>
+        </div>
+        <div class="info-box">
+          <p><strong>조작:</strong> 이동 WASD/방향키 · 대시 Shift · 파동 Space · 일시정지 Esc/P</p>
+          <p><strong>승리 조건:</strong> 100% 충전 후 등장하는 보스를 격파</p>
+          <p><strong>패배 조건:</strong> HP가 0이 되거나 비콘 내구도가 0이 됨</p>
+          <p><strong>최고 기록:</strong> <span id="bestScore">0</span> · <strong>해금:</strong> <span id="unlocked">기본 파동</span></p>
+        </div>
+      </section>
+
+      <section id="options" class="panel" aria-live="polite">
+        <h2>옵션</h2>
+        <label>마스터 볼륨 <input id="volume" type="range" min="0" max="100" value="70" /></label>
+        <label><input id="shake" type="checkbox" checked /> 화면 흔들림 사용</label>
+        <label><input id="flash" type="checkbox" checked /> 강한 플래시 효과 사용</label>
+        <label><input id="assist" type="checkbox" /> 보조 모드 (피해 완화 + 충전 속도 증가)</label>
+        <button class="back-btn" data-back="menu">뒤로</button>
+      </section>
+
+      <section id="credits" class="panel" aria-live="polite">
+        <h2>크레딧</h2>
+        <p>기획/아트/프로그래밍/사운드: Autonomous Codex Agent</p>
+        <p>장르: 싱글 플레이 로그라이트 스타일 아레나 액션</p>
+        <p>오프라인 단일 파일 구조 + 바닐라 JavaScript</p>
+        <button class="back-btn" data-back="menu">뒤로</button>
+      </section>
+
+      <section id="hud" class="hud" aria-live="off">
+        <div>HP <span id="hpText"></span></div>
+        <div>비콘 <span id="beaconText"></span></div>
+        <div>충전 <span id="chargeText"></span></div>
+        <div>점수 <span id="scoreText"></span></div>
+        <div>파동 <span id="pulseText"></span></div>
+      </section>
+
+      <section id="overlay" class="overlay"></section>
+    </main>
+
+    <script src="game.js"></script>
+  </body>
+</html>
