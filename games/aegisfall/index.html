@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AEGISFALL: Eclipse Run</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="app" class="app">
+      <canvas id="gameCanvas" width="960" height="540" aria-label="게임 화면"></canvas>
+
+      <section id="titleScreen" class="screen active" aria-label="타이틀 화면">
+        <div class="title-backdrop"></div>
+        <div class="panel title-panel">
+          <p class="kicker">LONE OPERATOR PROTOCOL</p>
+          <h1>AEGISFALL</h1>
+          <p class="subtitle">Eclipse Run</p>
+          <p class="desc">무너지는 궤도 요새에서 코어를 지키며 11분 작전을 완수하라.</p>
+          <div class="menu-buttons" data-menu="title">
+            <button id="btnContinue" class="menu-btn" hidden>CONTINUE</button>
+            <button id="btnStart" class="menu-btn primary">NEW RUN</button>
+            <button id="btnOptions" class="menu-btn">OPTIONS</button>
+            <button id="btnCredits" class="menu-btn">CREDITS</button>
+          </div>
+          <p class="help">WASD 이동 · 마우스 조준/사격 · Shift 대시 · Space 펄스 · P 일시정지</p>
+        </div>
+      </section>
+
+      <section id="optionsScreen" class="screen" aria-label="옵션 화면">
+        <div class="panel">
+          <h2>OPTIONS</h2>
+          <div class="option-grid">
+            <label>난이도
+              <select id="optDifficulty">
+                <option value="story">Story</option>
+                <option value="normal">Normal</option>
+                <option value="hard">Hard</option>
+              </select>
+            </label>
+            <label>마스터 볼륨 <span id="valMaster"></span>
+              <input id="optMaster" type="range" min="0" max="100" value="70" />
+            </label>
+            <label>효과음 볼륨 <span id="valSfx"></span>
+              <input id="optSfx" type="range" min="0" max="100" value="80" />
+            </label>
+            <label>배경음 볼륨 <span id="valMusic"></span>
+              <input id="optMusic" type="range" min="0" max="100" value="60" />
+            </label>
+            <label class="check"><input id="optReducedFx" type="checkbox" /> 화면 효과 줄이기</label>
+            <label class="check"><input id="optAutoFire" type="checkbox" /> 자동 사격 보조</label>
+          </div>
+          <div class="menu-buttons" data-menu="options">
+            <button id="btnResetOptions" class="menu-btn danger">RESET</button>
+            <button id="btnOptionsBack" class="menu-btn primary">BACK</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="creditsScreen" class="screen" aria-label="크레딧 화면">
+        <div class="panel">
+          <h2>CREDITS</h2>
+          <p><strong>Design / Code / Art / Audio:</strong> Autonomous Codex Studio</p>
+          <p><strong>Engine:</strong> Vanilla HTML5 Canvas + Web Audio API</p>
+          <p><strong>Build:</strong> Offline Ready · No External Assets</p>
+          <div class="menu-buttons" data-menu="credits">
+            <button id="btnCreditsBack" class="menu-btn primary">BACK</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="pauseScreen" class="screen" aria-label="일시정지 화면">
+        <div class="panel">
+          <h2>PAUSED</h2>
+          <p>작전이 중단되었습니다.</p>
+          <div class="menu-buttons" data-menu="pause">
+            <button id="btnResume" class="menu-btn primary">RESUME</button>
+            <button id="btnPauseOptions" class="menu-btn">OPTIONS</button>
+            <button id="btnQuit" class="menu-btn danger">QUIT TO TITLE</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="resultScreen" class="screen" aria-label="결과 화면">
+        <div class="panel">
+          <h2 id="resultTitle">MISSION COMPLETE</h2>
+          <p id="resultSummary"></p>
+          <div id="resultStats" class="result-stats"></div>
+          <div class="menu-buttons" data-menu="result">
+            <button id="btnReplay" class="menu-btn primary">REDEPLOY</button>
+            <button id="btnResultTitle" class="menu-btn">TITLE</button>
+          </div>
+        </div>
+      </section>
+
+      <div id="hud" class="hud" aria-live="polite">
+        <div class="hud-top">
+          <div class="resource health"><span>HP</span><div><i id="hpBar"></i></div></div>
+          <div class="resource core"><span>CORE</span><div><i id="coreBar"></i></div></div>
+          <div class="resource energy"><span>ENERGY</span><div><i id="energyBar"></i></div></div>
+        </div>
+        <div class="hud-mid">
+          <p id="stageLabel">PHASE 1 · APPROACH</p>
+          <p id="timerLabel">11:00</p>
+          <p id="objectiveLabel">코어를 지키며 생존하세요</p>
+        </div>
+        <div class="hud-bottom">
+          <span id="scoreLabel">Score 0</span>
+          <span id="comboLabel">Combo x1.0</span>
+          <span id="bestLabel">Best 0</span>
+        </div>
+      </div>
+
+      <div id="toast" class="toast"></div>
+      <div id="upgradeModal" class="upgrade-modal" role="dialog" aria-modal="true" aria-label="업그레이드 선택">
+        <div class="panel">
+          <h2>TACTICAL UPGRADE</h2>
+          <p>한 가지 개선을 선택하세요. [1][2][3]</p>
+          <div id="upgradeChoices" class="upgrade-choices"></div>
+        </div>
+      </div>
+    </div>
+    <script src="game.js"></script>
+  </body>
+</html>
