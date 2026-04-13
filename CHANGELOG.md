@@ -2,6 +2,13 @@
 
 ## 2026-04-13
 
+- Added new standalone game `games/clockworkcourt/` titled **CLOCKWORK COURT: Signal Oath** with full title/options/pause/result flow, four-chapter rail command progression, chapter upgrades, Web Audio SFX, and local best/settings save.
+- Added new standalone game `games/wardprotocol/` titled **WARD PROTOCOL: Relic Containment** featuring four-chapter relic sealing action, evolving mutation rules, focus slow mode, full title/options/pause/result flow, Web Audio SFX, and local best/settings save.
+- Added new standalone game `games/ghostledger/` titled **GHOST LEDGER: Silent Circuit** featuring four-chapter stealth infiltration, hacking objectives, chapter upgrades, full title/options/pause/result flow, Web Audio SFX, and local continue/best save.
+- Added new standalone game `games/sunshard/` titled **SUNSHARD: Bastion Rite** with four-sector + boss tactical survival progression, full title/options/pause/result flow, Web Audio SFX, and local best/settings/continue save.
+- Added new standalone game `games/arcfall/` titled **ARCFALL: Timebreak Pursuit** with 12-minute time fracture action run, sector transitions, boss climax, full title/options/pause/result flow, Web Audio SFX, and local continue/best save.
+- Added hub card links for all five new games in root `index.html`.
+- Updated root `README.md` registry to include all five new games.
 - Added new standalone game `games/nightcourier/` titled **NIGHT COURIER: Black File** featuring a four-chapter stealth infiltration run with hacking objectives, evolving enemy sets (guards/cameras/drones/hunter), chapter upgrades, full title/options/pause/result flow, Web Audio SFX, and local continue/best save.
 - Added hub card link for NIGHT COURIER in root `index.html`.
 - Updated root `README.md` registry to include NIGHT COURIER.
