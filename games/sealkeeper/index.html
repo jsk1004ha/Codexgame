@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SEALKEEPER: Archive Quarantine</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="grain"></div>
+    <main id="app">
+      <section id="titleScreen" class="screen active" aria-labelledby="gameTitle">
+        <div class="title-scene" aria-hidden="true">
+          <div class="ring ring-a"></div>
+          <div class="ring ring-b"></div>
+          <div class="ring ring-c"></div>
+        </div>
+        <h1 id="gameTitle">SEALKEEPER</h1>
+        <p class="tagline">Archive Quarantine</p>
+        <p class="desc">균열난 유물을 봉인해 금서고의 붕괴를 막으세요.</p>
+        <div class="menu-grid" role="menu" aria-label="메인 메뉴">
+          <button class="menu-btn primary" data-action="continue">Continue</button>
+          <button class="menu-btn" data-action="new">New Run</button>
+          <button class="menu-btn" data-action="options">Options</button>
+          <button class="menu-btn" data-action="credits">Credits</button>
+        </div>
+        <div class="panel controls-preview">
+          <h2>빠른 조작</h2>
+          <p><strong>A/S/D</strong> 레인 선택 · <strong>J/K/L/;</strong> 봉인 각인 · <strong>Space</strong> 추방 · <strong>Shift</strong> 집중 슬로우</p>
+        </div>
+      </section>
+
+      <section id="optionsScreen" class="screen" aria-labelledby="optionsTitle">
+        <h2 id="optionsTitle">Options</h2>
+        <div class="panel options-grid">
+          <label>마스터 볼륨 <input id="masterVolume" type="range" min="0" max="100" value="70" /></label>
+          <label>효과음 볼륨 <input id="sfxVolume" type="range" min="0" max="100" value="85" /></label>
+          <label><input id="muteToggle" type="checkbox" /> 음소거</label>
+          <label>난이도
+            <select id="difficultySelect">
+              <option value="story">Story</option>
+              <option value="standard" selected>Standard</option>
+              <option value="hard">Hard</option>
+            </select>
+          </label>
+          <label><input id="flashToggle" type="checkbox" checked /> 위기 플래시 효과</label>
+          <label><input id="screenShakeToggle" type="checkbox" checked /> 화면 흔들림</label>
+          <label><input id="largeTextToggle" type="checkbox" /> 큰 글씨 모드</label>
+        </div>
+        <div class="menu-grid compact">
+          <button class="menu-btn" data-action="backToTitle">Back</button>
+        </div>
+      </section>
+
+      <section id="creditsScreen" class="screen" aria-labelledby="creditsTitle">
+        <h2 id="creditsTitle">Credits</h2>
+        <div class="panel">
+          <p><strong>Design / Code / Art / Audio:</strong> Autonomous Codex Indie Agent</p>
+          <p><strong>Engine:</strong> HTML + CSS + Vanilla JavaScript</p>
+          <p><strong>Audio:</strong> Web Audio API synth SFX</p>
+          <p><strong>Save:</strong> LocalStorage best run 기록</p>
+        </div>
+        <div class="menu-grid compact">
+          <button class="menu-btn" data-action="backToTitle">Back</button>
+        </div>
+      </section>
+
+      <section id="gameScreen" class="screen" aria-label="게임 화면">
+        <header class="hud-top">
+          <div class="metric"><span>장막 안정도</span><strong id="integrityText">100%</strong></div>
+          <div class="metric"><span>격리 점수</span><strong id="scoreText">0</strong></div>
+          <div class="metric"><span>챕터</span><strong id="chapterText">I</strong></div>
+          <div class="metric"><span>집중 게이지</span><strong id="focusText">100</strong></div>
+          <div class="metric"><span>연속 봉인</span><strong id="comboText">x0</strong></div>
+        </header>
+
+        <div class="arena-wrap">
+          <aside class="rules panel" aria-live="polite">
+            <h3>격리 규칙</h3>
+            <ul id="ruleList"></ul>
+            <p class="goal" id="goalText"></p>
+            <p class="danger" id="dangerText"></p>
+          </aside>
+
+          <div class="arena panel">
+            <div id="laneGrid" class="lane-grid" aria-label="격리 레인"></div>
+            <div class="seal-map" id="sealMap"></div>
+            <div id="toast" class="toast" aria-live="polite"></div>
+          </div>
+
+          <aside class="events panel">
+            <h3>작전 로그</h3>
+            <ul id="eventLog"></ul>
+          </aside>
+        </div>
+
+        <footer class="hud-bottom">
+          <div class="small-help">A/S/D 레인 · J/K/L/; 봉인 · Space 추방 · Shift 집중 · Esc 일시정지</div>
+          <button id="pauseBtn" class="menu-btn tiny">Pause</button>
+        </footer>
+      </section>
+
+      <section id="pauseOverlay" class="overlay" aria-modal="true" role="dialog" aria-labelledby="pauseTitle">
+        <div class="panel modal">
+          <h2 id="pauseTitle">작전 일시정지</h2>
+          <p>봉인 흐름이 정지되었습니다.</p>
+          <div class="menu-grid compact">
+            <button class="menu-btn" data-action="resume">Resume</button>
+            <button class="menu-btn" data-action="restart">Restart</button>
+            <button class="menu-btn" data-action="toOptions">Options</button>
+            <button class="menu-btn danger" data-action="quitToTitle">Quit</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="resultOverlay" class="overlay" aria-modal="true" role="dialog" aria-labelledby="resultTitle">
+        <div class="panel modal">
+          <h2 id="resultTitle">작전 결과</h2>
+          <p id="resultSubtitle"></p>
+          <div class="result-grid">
+            <div><span>최종 점수</span><strong id="finalScore">0</strong></div>
+            <div><span>최대 콤보</span><strong id="finalCombo">0</strong></div>
+            <div><span>생존 시간</span><strong id="finalTime">00:00</strong></div>
+            <div><span>베스트</span><strong id="bestScore">0</strong></div>
+          </div>
+          <p id="resultFlavor" class="result-flavor"></p>
+          <div class="menu-grid compact">
+            <button class="menu-btn primary" data-action="playAgain">Play Again</button>
+            <button class="menu-btn" data-action="quitToTitle">Main Menu</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="game.js"></script>
+  </body>
+</html>
