@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SUNSHARD: Bastion Rite</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="game-shell">
+      <canvas id="gameCanvas" width="1280" height="720" aria-label="게임 화면"></canvas>
+
+      <header class="hud" id="hud" aria-live="polite">
+        <div class="hud-block">
+          <span class="label">Pilot</span>
+          <strong id="hpText">100</strong>
+          <div class="bar"><i id="hpBar"></i></div>
+        </div>
+        <div class="hud-block">
+          <span class="label">Core Shield</span>
+          <strong id="coreText">100</strong>
+          <div class="bar"><i id="coreBar"></i></div>
+        </div>
+        <div class="hud-block compact">
+          <span class="label">Heat</span>
+          <strong id="heatText">0%</strong>
+        </div>
+        <div class="hud-block compact">
+          <span class="label">Sector</span>
+          <strong id="sectorText">I</strong>
+        </div>
+        <div class="hud-block compact">
+          <span class="label">Elapsed</span>
+          <strong id="timeText">00:00</strong>
+        </div>
+        <div class="hud-block compact">
+          <span class="label">Score</span>
+          <strong id="scoreText">0</strong>
+        </div>
+      </header>
+
+      <aside class="event-feed" id="eventFeed" aria-live="assertive"></aside>
+
+      <section class="overlay title-screen" id="titleScreen">
+        <div class="panel logo-panel">
+          <p class="eyebrow">Solo Tactical Survival</p>
+          <h1>SUNSHARD</h1>
+          <p class="subtitle">Ashen Loop</p>
+          <p class="desc">붕괴하는 성소에서 4개 구역 침공과 최종 심판자까지 버티며 코어를 지켜라.</p>
+          <nav class="menu" aria-label="메인 메뉴">
+            <button data-action="continue" id="continueBtn">Continue</button>
+            <button data-action="new">New Run</button>
+            <button data-action="options">Options</button>
+            <button data-action="credits">Credits</button>
+          </nav>
+          <p class="controls-tip">
+            이동: WASD/방향키 · 공격: Space · 대시: Shift · 시길 펄스: E · 일시정지: Esc
+          </p>
+        </div>
+      </section>
+
+      <section class="overlay hidden" id="optionsScreen">
+        <div class="panel">
+          <h2>Options</h2>
+          <label>Master Volume <input type="range" id="masterVolume" min="0" max="100" value="70" /></label>
+          <label>SFX Volume <input type="range" id="sfxVolume" min="0" max="100" value="75" /></label>
+          <label class="row"><span>Screenshake</span><input type="checkbox" id="shakeToggle" checked /></label>
+          <label class="row"><span>High Contrast</span><input type="checkbox" id="contrastToggle" /></label>
+          <label>Difficulty
+            <select id="difficultySelect">
+              <option value="story">Story</option>
+              <option value="normal" selected>Normal</option>
+              <option value="veteran">Veteran</option>
+            </select>
+          </label>
+          <div class="row buttons">
+            <button data-action="save-options">Apply</button>
+            <button data-action="back-title">Back</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="overlay hidden" id="pauseScreen">
+        <div class="panel">
+          <h2>Paused</h2>
+          <p>전술 오버레이가 정지되었습니다.</p>
+          <div class="row buttons">
+            <button data-action="resume">Resume</button>
+            <button data-action="restart">Restart Run</button>
+            <button data-action="options">Options</button>
+            <button data-action="quit">Main Menu</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="overlay hidden" id="creditsScreen">
+        <div class="panel">
+          <h2>Credits</h2>
+          <p>Design / Code / Audio / UI: Autonomous Codex Agent</p>
+          <p>Built with HTML, CSS, Vanilla JavaScript + Web Audio API.</p>
+          <button data-action="back-title">Back</button>
+        </div>
+      </section>
+
+      <section class="overlay hidden" id="resultScreen">
+        <div class="panel">
+          <h2 id="resultTitle">Operation Complete</h2>
+          <p id="resultSummary"></p>
+          <div class="stats" id="resultStats"></div>
+          <div class="row buttons">
+            <button data-action="restart">Play Again</button>
+            <button data-action="quit">Main Menu</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="game.js"></script>
+  </body>
+</html>

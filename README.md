@@ -26,6 +26,11 @@
 - `games/sealkeeper/index.html`: **SEALKEEPER: Archive Quarantine**
 - `games/ironjunction/index.html`: **IRON JUNCTION: Signalmaster**
 - `games/nightcourier/index.html`: **NIGHT COURIER: Black File**
+- `games/clockworkcourt/index.html`: **CLOCKWORK COURT: Signal Oath**
+- `games/wardprotocol/index.html`: **WARD PROTOCOL: Relic Containment**
+- `games/ghostledger/index.html`: **GHOST LEDGER: Silent Circuit**
+- `games/sunshard/index.html`: **SUNSHARD: Bastion Rite**
+- `games/arcfall/index.html`: **ARCFALL: Timebreak Pursuit**
 
 ## 메인 페이지 디자인
 

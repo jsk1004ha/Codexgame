@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CLOCKWORK COURT: Signal Oath</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="app" class="app">
+      <canvas id="gameCanvas" width="960" height="540" aria-label="게임 화면"></canvas>
+
+      <header class="hud-top" aria-live="polite">
+        <div class="hud-block"><span>CHAPTER</span><strong id="hudChapter">1</strong></div>
+        <div class="hud-block"><span>TIME</span><strong id="hudTime">04:00</strong></div>
+        <div class="hud-block"><span>QUOTA</span><strong id="hudQuota">0 / 0</strong></div>
+        <div class="hud-block"><span>INTEGRITY</span><strong id="hudIntegrity">3</strong></div>
+        <div class="hud-block"><span>SCORE</span><strong id="hudScore">0</strong></div>
+      </header>
+
+      <aside class="hud-side">
+        <div class="meter-label">FOCUS</div>
+        <div class="meter"><div id="focusFill"></div></div>
+        <div class="meter-label">THREAT</div>
+        <div class="meter danger"><div id="threatFill"></div></div>
+        <p id="chapterHint" class="hint"></p>
+      </aside>
+
+      <div id="toast" class="toast" role="status" aria-live="assertive"></div>
+
+      <section id="menuTitle" class="panel screen active" aria-label="타이틀 화면">
+        <h1>CLOCKWORK COURT</h1>
+        <p class="tag">신호를 지배해 도시 철도 붕괴를 막아라.</p>
+        <div class="menu-grid">
+          <button data-action="continue">Continue</button>
+          <button data-action="new">New Run</button>
+          <button data-action="options">Options</button>
+          <button data-action="credits">Credits</button>
+        </div>
+        <p class="help">키보드/마우스 지원 · 메뉴: ↑↓ Enter · 게임 중 Esc 일시정지</p>
+      </section>
+
+      <section id="menuOptions" class="panel screen" aria-label="옵션">
+        <h2>Operations Console</h2>
+        <label>난이도
+          <select id="optDifficulty">
+            <option value="story">Story</option>
+            <option value="standard">Standard</option>
+            <option value="veteran">Veteran</option>
+          </select>
+        </label>
+        <label>마스터 볼륨 <input type="range" id="optVolume" min="0" max="100" value="70" /></label>
+        <label><input type="checkbox" id="optMute" /> 음소거</label>
+        <label><input type="checkbox" id="optReduceMotion" /> 연출 감소</label>
+        <label><input type="checkbox" id="optHighContrast" /> 고대비 UI</label>
+        <label>텍스트 크기
+          <select id="optTextScale">
+            <option value="1">기본</option>
+            <option value="1.1">크게</option>
+            <option value="1.25">매우 크게</option>
+          </select>
+        </label>
+        <div class="menu-grid two">
+          <button data-action="saveOptions">Apply</button>
+          <button data-action="backTitle">Back</button>
+        </div>
+      </section>
+
+      <section id="menuPause" class="panel screen" aria-label="일시정지">
+        <h2>Paused</h2>
+        <div class="menu-grid">
+          <button data-action="resume">Resume</button>
+          <button data-action="restart">Restart Run</button>
+          <button data-action="options">Options</button>
+          <button data-action="toTitle">Main Menu</button>
+        </div>
+      </section>
+
+      <section id="menuUpgrade" class="panel screen" aria-label="강화 선택">
+        <h2>Chapter Clear - Route Upgrade</h2>
+        <p>다음 구간을 위해 1개를 선택하세요.</p>
+        <div id="upgradeList" class="upgrade-list"></div>
+      </section>
+
+      <section id="menuResult" class="panel screen" aria-label="결과 화면">
+        <h2 id="resultTitle">Run Complete</h2>
+        <p id="resultDesc"></p>
+        <ul id="resultStats"></ul>
+        <div class="menu-grid two">
+          <button data-action="new">New Run</button>
+          <button data-action="toTitle">Main Menu</button>
+        </div>
+      </section>
+
+      <section id="menuCredits" class="panel screen" aria-label="크레딧">
+        <h2>Credits</h2>
+        <p>Design / Code / Audio / UI: Autonomous Codex Game Agent</p>
+        <p>Engine: Vanilla HTML5 Canvas + Web Audio API</p>
+        <button data-action="backTitle">Back</button>
+      </section>
+
+      <footer class="controls">
+        <strong>조작:</strong>
+        <span>1~3: 분기 스위치</span>
+        <span>Q/W/E: 진입 신호 정지</span>
+        <span>Space: Focus Slow</span>
+        <span>P·Esc: 일시정지</span>
+      </footer>
+    </div>
+    <script src="game.js"></script>
+  </body>
+</html>
