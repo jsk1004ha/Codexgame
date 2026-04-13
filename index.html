@@ -7,10 +7,12 @@
     <style>
       :root {
         color-scheme: dark;
-        --bg: #0f172a;
-        --card: #1e293b;
-        --accent: #38bdf8;
+        --bg: #020617;
+        --surface: rgba(15, 23, 42, 0.72);
+        --border: rgba(148, 163, 184, 0.25);
         --text: #e2e8f0;
+        --muted: #cbd5e1;
+        --accent: #7dd3fc;
       }
 
       * {
@@ -19,40 +21,102 @@
 
       body {
         margin: 0;
+        min-height: 100vh;
         font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
-        background: radial-gradient(circle at top, #1e293b, var(--bg));
         color: var(--text);
+        background:
+          radial-gradient(circle at 10% -10%, rgba(56, 189, 248, 0.35), transparent 35%),
+          radial-gradient(circle at 100% 0%, rgba(59, 130, 246, 0.3), transparent 32%),
+          linear-gradient(160deg, #020617, #0f172a 45%, #020617 100%);
+        overflow-x: hidden;
+      }
+
+      body::before,
+      body::after {
+        content: "";
+        position: fixed;
+        border-radius: 50%;
+        filter: blur(42px);
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      body::before {
+        width: 220px;
+        height: 220px;
+        left: 12%;
+        top: 12%;
+        background: rgba(125, 211, 252, 0.32);
+        animation: drift 12s ease-in-out infinite;
+      }
+
+      body::after {
+        width: 260px;
+        height: 260px;
+        right: 8%;
+        bottom: 12%;
+        background: rgba(59, 130, 246, 0.28);
+        animation: drift 15s ease-in-out infinite reverse;
       }
 
       main {
-        max-width: 900px;
+        position: relative;
+        z-index: 1;
+        max-width: 920px;
         margin: 0 auto;
-        padding: 48px 20px 72px;
+        padding: 56px 20px 72px;
       }
 
       h1 {
+        margin: 0 0 14px;
         font-size: clamp(2rem, 5vw, 3rem);
-        margin: 0 0 12px;
+        letter-spacing: -0.02em;
+        animation: fade-up 0.7s ease both;
       }
 
       p {
         margin: 0;
-        line-height: 1.6;
+        line-height: 1.65;
+        color: var(--muted);
+      }
+
+      .intro {
+        max-width: 65ch;
+        animation: fade-up 0.8s 0.1s ease both;
       }
 
       .games {
-        margin-top: 32px;
+        margin-top: 34px;
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
         gap: 16px;
       }
 
       .card {
-        background: var(--card);
-        border: 1px solid #334155;
-        border-radius: 14px;
+        background: linear-gradient(160deg, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.7));
+        border: 1px solid var(--border);
+        backdrop-filter: blur(12px);
+        border-radius: 16px;
         padding: 20px;
-        box-shadow: 0 10px 30px rgba(2, 6, 23, 0.35);
+        box-shadow: 0 12px 32px rgba(2, 6, 23, 0.38);
+        transform: translateY(18px);
+        opacity: 0;
+        animation: card-in 0.75s ease forwards;
+        transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .card:nth-child(2) {
+        animation-delay: 0.12s;
+      }
+
+      .card:nth-child(3) {
+        animation-delay: 0.24s;
+      }
+
+      .card:hover {
+        transform: translateY(-6px);
+        border-color: rgba(125, 211, 252, 0.55);
+        box-shadow: 0 20px 38px rgba(2, 6, 23, 0.55);
       }
 
       .card h2 {
@@ -61,31 +125,85 @@
       }
 
       .card p {
-        opacity: 0.9;
         min-height: 52px;
       }
 
       .card a {
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
         margin-top: 12px;
         color: var(--accent);
         text-decoration: none;
-        font-weight: 600;
+        font-weight: 650;
+        transition: gap 0.25s ease, color 0.25s ease;
+      }
+
+      .card a:hover {
+        gap: 10px;
+        color: #bae6fd;
       }
 
       .hint {
         margin-top: 28px;
-        padding: 16px;
-        border-left: 4px solid var(--accent);
-        background: rgba(56, 189, 248, 0.1);
-        border-radius: 8px;
+        padding: 16px 18px;
+        border: 1px solid rgba(125, 211, 252, 0.35);
+        background: rgba(14, 116, 144, 0.16);
+        border-radius: 12px;
+        animation: fade-up 0.8s 0.28s ease both;
+      }
+
+      @keyframes fade-up {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes card-in {
+        from {
+          opacity: 0;
+          transform: translateY(18px) scale(0.985);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      @keyframes drift {
+        0%,
+        100% {
+          transform: translate3d(0, 0, 0);
+        }
+        50% {
+          transform: translate3d(0, -18px, 0) scale(1.06);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation: none !important;
+          transition: none !important;
+        }
+
+        .card {
+          opacity: 1;
+          transform: none;
+        }
       }
     </style>
   </head>
   <body>
     <main>
       <h1>Codex Game Hub</h1>
-      <p>
+      <p class="intro">
         코덱스가 만든 게임을 한 곳에서 모아 보는 메인 페이지입니다. 각 게임은
         <code>games/게임이름</code> 폴더에 넣고, 아래 목록에 링크를 추가해 접속할 수
         있습니다.
