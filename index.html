@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Codex Game Hub</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #0f172a;
+        --card: #1e293b;
+        --accent: #38bdf8;
+        --text: #e2e8f0;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
+        background: radial-gradient(circle at top, #1e293b, var(--bg));
+        color: var(--text);
+      }
+
+      main {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 48px 20px 72px;
+      }
+
+      h1 {
+        font-size: clamp(2rem, 5vw, 3rem);
+        margin: 0 0 12px;
+      }
+
+      p {
+        margin: 0;
+        line-height: 1.6;
+      }
+
+      .games {
+        margin-top: 32px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+        gap: 16px;
+      }
+
+      .card {
+        background: var(--card);
+        border: 1px solid #334155;
+        border-radius: 14px;
+        padding: 20px;
+        box-shadow: 0 10px 30px rgba(2, 6, 23, 0.35);
+      }
+
+      .card h2 {
+        margin: 0 0 8px;
+        font-size: 1.15rem;
+      }
+
+      .card p {
+        opacity: 0.9;
+        min-height: 52px;
+      }
+
+      .card a {
+        display: inline-block;
+        margin-top: 12px;
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .hint {
+        margin-top: 28px;
+        padding: 16px;
+        border-left: 4px solid var(--accent);
+        background: rgba(56, 189, 248, 0.1);
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Codex Game Hub</h1>
+      <p>
+        코덱스가 만든 게임을 한 곳에서 모아 보는 메인 페이지입니다. 각 게임은
+        <code>games/게임이름</code> 폴더에 넣고, 아래 목록에 링크를 추가해 접속할 수
+        있습니다.
+      </p>
+
+      <section class="games" aria-label="게임 목록">
+        <article class="card">
+          <h2>예시 게임</h2>
+          <p>새 게임을 만들 때 참고할 수 있는 카드 예시입니다.</p>
+          <a href="./games/example/index.html">게임 시작 →</a>
+        </article>
+      </section>
+
+      <div class="hint">
+        <strong>추가 방법:</strong> 새 게임 폴더를 만든 뒤, 메인 페이지의 카드와 링크를
+        한 줄 추가하면 즉시 허브에서 접근할 수 있습니다.
+      </div>
+    </main>
+  </body>
+</html>
