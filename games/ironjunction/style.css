@@ -1,0 +1,177 @@
+:root {
+  --bg: #0d0e12;
+  --surface: #1f2029cc;
+  --border: #5f6478;
+  --text: #f3f4f8;
+  --muted: #b7bac7;
+  --accent: #e6b84a;
+  --danger: #ff5e5e;
+  --reward: #6fd68a;
+  --inactive: #747b92;
+  --focus: #90cbff;
+  --font-scale: 1;
+}
+
+body {
+  margin: 0;
+  background: radial-gradient(circle at 20% 10%, #26293a, #0b0c10 55%);
+  color: var(--text);
+  font-family: "Segoe UI", "Malgun Gothic", sans-serif;
+  font-size: calc(16px * var(--font-scale));
+}
+
+* { box-sizing: border-box; }
+
+.app {
+  max-width: 1040px;
+  margin: 0 auto;
+  min-height: 100vh;
+  padding: 14px;
+  display: grid;
+  grid-template-columns: 1fr 160px;
+  grid-template-rows: auto 540px auto;
+  gap: 10px;
+  position: relative;
+}
+
+canvas {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+  width: 100%;
+  max-width: 960px;
+  border: 2px solid #3d4052;
+  background: linear-gradient(#1a1b23, #161821);
+  box-shadow: 0 14px 34px #000a;
+}
+
+.hud-top {
+  grid-column: 1 / 3;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.hud-block {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 7px 10px;
+  min-width: 108px;
+}
+.hud-block span { display: block; color: var(--muted); font-size: 0.72rem; letter-spacing: 0.08em; }
+.hud-block strong { font-size: 1.05rem; }
+
+.hud-side {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  border: 1px solid var(--border);
+  background: linear-gradient(#2a2d3d, #1d1f2c);
+  padding: 12px;
+}
+.meter-label { color: var(--muted); margin-top: 8px; font-size: 0.82rem; }
+.meter {
+  height: 18px;
+  border: 1px solid #757d9b;
+  background: #10141f;
+  margin-top: 4px;
+}
+.meter > div { height: 100%; width: 0%; background: linear-gradient(90deg, #57a8ff, #b6e1ff); transition: width 0.12s linear; }
+.meter.danger > div { background: linear-gradient(90deg, #ff7a7a, #ff3030); }
+.hint { color: #ffe2a1; font-size: 0.86rem; line-height: 1.4; }
+
+.controls {
+  grid-column: 1 / 3;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.panel {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(640px, 92vw);
+  padding: 20px;
+  border: 2px solid #6d748e;
+  background: linear-gradient(170deg, #11141ccc, #1e2230f2 70%);
+  box-shadow: 0 16px 38px #000d;
+  backdrop-filter: blur(2px);
+}
+.screen { display: none; }
+.screen.active { display: block; }
+
+h1, h2 { margin: 0 0 12px; letter-spacing: 0.06em; }
+.tag { color: #f0d18b; margin-bottom: 14px; }
+
+.menu-grid { display: grid; gap: 10px; }
+.menu-grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+button, select, input[type="range"] {
+  font: inherit;
+}
+button {
+  background: #2f3348;
+  color: var(--text);
+  border: 1px solid #7d859f;
+  padding: 10px 12px;
+  cursor: pointer;
+}
+button:hover { background: #3a4060; border-color: #a8b0ce; }
+button:active { transform: translateY(1px); background: #25283a; }
+button:focus-visible,
+select:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px #000, 0 0 0 6px #f5cb63;
+}
+button[disabled] { opacity: 0.4; cursor: not-allowed; }
+
+label { display: grid; gap: 6px; margin-bottom: 10px; color: var(--muted); }
+select,
+input[type="range"] {
+  background: #151826;
+  color: var(--text);
+  border: 1px solid #7a819b;
+  padding: 8px;
+}
+
+.upgrade-list { display: grid; gap: 10px; margin-top: 12px; }
+.upgrade-btn { text-align: left; min-height: 84px; }
+.upgrade-btn b { display: block; color: #f6d883; margin-bottom: 4px; }
+
+#resultStats { padding-left: 18px; color: var(--muted); }
+
+.toast {
+  position: absolute;
+  left: 22px;
+  bottom: 66px;
+  padding: 9px 12px;
+  border: 1px solid #a7afc7;
+  background: #121725dd;
+  display: none;
+}
+.toast.show { display: block; }
+
+body.high-contrast {
+  --bg: #000;
+  --surface: #000;
+  --text: #fff;
+  --muted: #fff;
+  --border: #fff;
+  --accent: #ffd400;
+}
+
+@media (max-width: 980px) {
+  .app {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto;
+  }
+  canvas, .hud-side { grid-column: 1 / 2; grid-row: auto; }
+  .hud-side { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}

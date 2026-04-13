@@ -2,6 +2,9 @@
 
 ## 2026-04-13
 
+- Added new standalone game `games/ironjunction/` titled **IRON JUNCTION: Signalmaster** with a four-chapter real-time rail control loop, chapter upgrades, full title/options/pause/result flow, Web Audio SFX, and local best/settings save.
+- Added hub card link for IRON JUNCTION in root `index.html`.
+- Updated root `README.md` registry to include IRON JUNCTION.
 - Added new standalone game `games/sealkeeper/` titled **SEALKEEPER: Archive Quarantine** with a four-chapter real-time sealing loop, evolving rule mutations, focus slow mode, pause/options/credits/result flows, Web Audio SFX, and local best/settings save.
 - Added hub card link for SEALKEEPER in root `index.html`.
 - Updated root `README.md` registry to include SEALKEEPER.

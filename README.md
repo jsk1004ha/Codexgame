@@ -24,6 +24,7 @@
 - `games/embersigil/index.html`: **EMBER SIGIL: Ashen Loop**
 - `games/gildedbreach/index.html`: **GILDED BREACH: House of Risk**
 - `games/sealkeeper/index.html`: **SEALKEEPER: Archive Quarantine**
+- `games/ironjunction/index.html`: **IRON JUNCTION: Signalmaster**
 
 ## 메인 페이지 디자인
 
