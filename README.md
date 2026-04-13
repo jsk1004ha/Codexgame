@@ -31,6 +31,11 @@
 - `games/ghostledger/index.html`: **GHOST LEDGER: Silent Circuit**
 - `games/sunshard/index.html`: **SUNSHARD: Bastion Rite**
 - `games/arcfall/index.html`: **ARCFALL: Timebreak Pursuit**
+- `games/prismshift/index.html`: **PRISMSHIFT: Terminal Run**
+- `games/driftarchive/index.html`: **DRIFTARCHIVE: Terminal Run**
+- `games/hollowsignal/index.html`: **HOLLOWSIGNAL: Terminal Run**
+- `games/emberrail/index.html`: **EMBERRAIL: Terminal Run**
+- `games/shivergate/index.html`: **SHIVERGATE: Terminal Run**
 
 ## 메인 페이지 디자인
 

@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PRISMSHIFT: Terminal Run</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <canvas id="gameCanvas" width="960" height="540" aria-label="게임 화면"></canvas>
+
+      <header class="hud" aria-live="polite">
+        <div class="hud-block wide">
+          <span class="label">Integrity</span>
+          <div class="bar"><span id="hpFill"></span></div>
+          <strong id="hpText">100 / 100</strong>
+        </div>
+        <div class="hud-block wide">
+          <span class="label">Thread</span>
+          <div class="bar thread"><span id="threadFill"></span></div>
+          <strong id="threadText">0%</strong>
+        </div>
+        <div class="hud-block">
+          <span class="label">Sector</span>
+          <strong id="sectorText">I</strong>
+        </div>
+        <div class="hud-block">
+          <span class="label">Time</span>
+          <strong id="timeText">00:00</strong>
+        </div>
+        <div class="hud-block">
+          <span class="label">Score</span>
+          <strong id="scoreText">0</strong>
+        </div>
+      </header>
+
+      <aside id="toast" class="toast" role="status"></aside>
+
+      <section id="titleScreen" class="overlay active" aria-labelledby="titleHeading">
+        <div class="panel title-panel">
+          <p class="eyebrow">Single-player fracture operation</p>
+          <h1 id="titleHeading">PRISMSHIFT<br /><span>TERMINAL RUN</span></h1>
+          <p class="subtitle">
+            12분 제한 시간 안에 붕괴하는 금고 구역을 돌파하고 시간망령을 처치하세요.
+          </p>
+          <nav class="menu" aria-label="메인 메뉴">
+            <button class="btn" data-action="continue">Continue</button>
+            <button class="btn primary" data-action="new">New Run</button>
+            <button class="btn" data-action="options">Options</button>
+            <button class="btn" data-action="credits">Credits</button>
+          </nav>
+          <div class="meta">
+            <p id="bestText">Best Score: 0</p>
+            <p id="clearText">Best Clear: --:--</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="optionsScreen" class="overlay" aria-labelledby="optionsHeading">
+        <div class="panel">
+          <h2 id="optionsHeading">Options</h2>
+          <div class="option-grid">
+            <label class="option-row">
+              <span>Master Volume</span>
+              <input id="volumeRange" type="range" min="0" max="100" step="1" />
+              <output id="volumeText">80%</output>
+            </label>
+            <label class="option-row compact">
+              <span>Mute</span>
+              <button id="muteBtn" class="toggle" type="button" aria-pressed="false">OFF</button>
+            </label>
+            <label class="option-row compact">
+              <span>Difficulty</span>
+              <select id="difficultySelect">
+                <option value="story">Story</option>
+                <option value="normal">Normal</option>
+                <option value="hard">Hard</option>
+              </select>
+            </label>
+            <label class="option-row compact">
+              <span>Motion FX</span>
+              <button id="motionBtn" class="toggle" type="button" aria-pressed="false">ON</button>
+            </label>
+            <label class="option-row compact">
+              <span>HUD Scale</span>
+              <select id="hudScaleSelect">
+                <option value="1">100%</option>
+                <option value="1.15">115%</option>
+                <option value="1.25">125%</option>
+              </select>
+            </label>
+          </div>
+          <div class="menu split">
+            <button class="btn" data-action="reset-options">Reset</button>
+            <button class="btn primary" data-action="back-options">Back</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="creditsScreen" class="overlay" aria-labelledby="creditsHeading">
+        <div class="panel">
+          <h2 id="creditsHeading">Credits</h2>
+          <p class="subtitle">Design · Code · Art · Audio · QA<br />Autonomous Codex Indie Unit</p>
+          <p class="small">Built with HTML / CSS / Vanilla JavaScript only. Fully offline playable.</p>
+          <div class="menu"><button class="btn primary" data-action="back-credits">Back</button></div>
+        </div>
+      </section>
+
+      <section id="pauseScreen" class="overlay" aria-labelledby="pauseHeading">
+        <div class="panel">
+          <h2 id="pauseHeading">Paused</h2>
+          <p class="subtitle">시간파는 멈췄습니다. 전략을 재정비하세요.</p>
+          <div class="menu">
+            <button class="btn primary" data-action="resume">Resume</button>
+            <button class="btn" data-action="options-pause">Options</button>
+            <button class="btn" data-action="to-title">Main Menu</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="resultScreen" class="overlay" aria-labelledby="resultHeading">
+        <div class="panel">
+          <h2 id="resultHeading">Run Complete</h2>
+          <p id="resultLead" class="subtitle">결과</p>
+          <dl class="result-grid">
+            <div><dt>Score</dt><dd id="resultScore">0</dd></div>
+            <div><dt>Clear Time</dt><dd id="resultTime">00:00</dd></div>
+            <div><dt>Eliminations</dt><dd id="resultKills">0</dd></div>
+            <div><dt>Sector</dt><dd id="resultSector">I</dd></div>
+          </dl>
+          <div class="menu">
+            <button class="btn primary" data-action="retry">Retry</button>
+            <button class="btn" data-action="to-title">Main Menu</button>
+          </div>
+        </div>
+      </section>
+
+      <footer class="controls">
+        Move: WASD / Arrow · Fire: Mouse Left / Space · Dash: Shift · Rewind: E · Pause: Esc
+      </footer>
+    </div>
+
+    <script src="./game.js"></script>
+  </body>
+</html>
