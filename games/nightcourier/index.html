@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NIGHT COURIER: Black File</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="app" class="app">
+      <canvas id="gameCanvas" width="960" height="540" aria-label="게임 화면"></canvas>
+
+      <header class="hud" id="hud" aria-live="polite">
+        <div class="hud-block">
+          <strong>무결성</strong>
+          <div class="bar"><div id="hpBar" class="fill danger"></div></div>
+        </div>
+        <div class="hud-block">
+          <strong>집중력</strong>
+          <div class="bar"><div id="focusBar" class="fill accent"></div></div>
+        </div>
+        <div class="hud-meta">
+          <span id="chapterLabel">CHAPTER 1</span>
+          <span id="objectiveLabel">단말 0 / 0</span>
+          <span id="timeLabel">00:00</span>
+          <span id="decoyLabel">미끼 0</span>
+        </div>
+      </header>
+
+      <div id="toast" class="toast" role="status"></div>
+
+      <section id="titleScreen" class="screen title active" aria-label="타이틀">
+        <div class="title-art"></div>
+        <div class="panel">
+          <p class="eyebrow">밀수 잠입 스릴러</p>
+          <h1>NIGHT COURIER<br /><span>BLACK FILE</span></h1>
+          <p class="tagline">경비망의 눈을 피하고 금지 문서를 4구역에서 회수해 새벽 전에 탈출하라.</p>
+          <div class="menu" role="menu">
+            <button data-action="continue" id="continueBtn">Continue</button>
+            <button data-action="new">New Run</button>
+            <button data-action="options">Options</button>
+            <button data-action="credits">Credits</button>
+          </div>
+          <p class="hint">이동 WASD · 해킹 E · 미끼 Space · 스캔 Q · 집중 Shift · 일시정지 Esc</p>
+        </div>
+      </section>
+
+      <section id="overlayScreen" class="screen overlay" aria-live="assertive">
+        <div class="panel" id="overlayPanel"></div>
+      </section>
+
+      <section id="optionsScreen" class="screen overlay">
+        <div class="panel options-panel">
+          <h2>Options</h2>
+          <label>난이도
+            <select id="difficultySelect">
+              <option value="story">Story</option>
+              <option value="standard">Standard</option>
+              <option value="veteran">Veteran</option>
+            </select>
+          </label>
+          <label>볼륨 <input id="volumeRange" type="range" min="0" max="1" step="0.05" /></label>
+          <label><input id="muteToggle" type="checkbox" /> 음소거</label>
+          <label><input id="shakeToggle" type="checkbox" /> 화면 흔들림 감소</label>
+          <label><input id="assistToggle" type="checkbox" /> 탐지 경고 보조 활성화</label>
+          <label>텍스트 크기
+            <select id="textScaleSelect">
+              <option value="1">기본</option>
+              <option value="1.12">확대</option>
+              <option value="1.25">더 크게</option>
+            </select>
+          </label>
+          <div class="menu horizontal">
+            <button id="saveOptionsBtn">적용</button>
+            <button id="backOptionsBtn">뒤로</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="creditsScreen" class="screen overlay">
+        <div class="panel credits-panel">
+          <h2>Credits</h2>
+          <p>Design / Code / UI / Audio: Codex Autonomous Indie Agent</p>
+          <p>Engine: Vanilla HTML5 Canvas + Web Audio API</p>
+          <p>Mode: Single Player Offline</p>
+          <button id="creditsBackBtn">Back</button>
+        </div>
+      </section>
+    </div>
+
+    <script src="game.js"></script>
+  </body>
+</html>

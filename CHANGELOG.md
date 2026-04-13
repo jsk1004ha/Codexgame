@@ -2,6 +2,9 @@
 
 ## 2026-04-13
 
+- Added new standalone game `games/nightcourier/` titled **NIGHT COURIER: Black File** featuring a four-chapter stealth infiltration run with hacking objectives, evolving enemy sets (guards/cameras/drones/hunter), chapter upgrades, full title/options/pause/result flow, Web Audio SFX, and local continue/best save.
+- Added hub card link for NIGHT COURIER in root `index.html`.
+- Updated root `README.md` registry to include NIGHT COURIER.
 - Added new standalone game `games/ironjunction/` titled **IRON JUNCTION: Signalmaster** with a four-chapter real-time rail control loop, chapter upgrades, full title/options/pause/result flow, Web Audio SFX, and local best/settings save.
 - Added hub card link for IRON JUNCTION in root `index.html`.
 - Updated root `README.md` registry to include IRON JUNCTION.
