@@ -22,6 +22,7 @@
 - `games/chronovault/index.html`: **CHRONO VAULT: Null Run**
 - `games/aegisfall/index.html`: **AEGISFALL: Eclipse Run**
 - `games/embersigil/index.html`: **EMBER SIGIL: Ashen Loop**
+- `games/gildedbreach/index.html`: **GILDED BREACH: House of Risk**
 
 ## 메인 페이지 디자인
 
